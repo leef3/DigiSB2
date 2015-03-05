@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:textColor="#79CDCD"
+            android:background="#70000000"
+            android:textSize="30dp"
+            android:text="Digital Business Assistant"
+            android:id="@+id/textView" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_margin="30px"
+            android:layout_height="fill_parent"
+            android:text="Employee"
+            android:id="@+id/employee_button"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_gravity="center_vertical" />
+        <!--android:background="#CCDC143C"-->
+
+        <Button
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_margin="30px"
+            android:layout_height="fill_parent"
+            android:text="Business Contacts"
+            android:id="@+id/contacts_button"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_gravity="center_vertical"/>
+        <!--android:background="#CC008080"-->
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_margin="30px"
+            android:layout_height="fill_parent"
+            android:text="Stock Room"
+            android:id="@+id/stockroom_button"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_gravity="center_vertical"/>
+        <!--android:background="#CCFFA500"-->
+
+        <Button
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_margin="30px"
+            android:layout_height="fill_parent"
+            android:text="Expenses"
+            android:id="@+id/expense_button"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_gravity="center_vertical"/>
+        <!--android:background="#CC006400"-->
+
+    </LinearLayout>
+
+
+</LinearLayout>
