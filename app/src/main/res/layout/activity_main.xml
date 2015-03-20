@@ -36,7 +36,8 @@
             android:text="Employee"
             android:id="@+id/employee_button"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            android:clickable="true" />
         <!--android:background="#CCDC143C"-->
 
         <Button
@@ -66,7 +67,10 @@
             android:text="Stock Room"
             android:id="@+id/stockroom_button"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:clickable="true"
+            android:enabled="true"
+            android:onClick="OnStockRoomItemSelected" />
         <!--android:background="#CCFFA500"-->
 
         <Button
@@ -77,7 +81,8 @@
             android:text="Expenses"
             android:id="@+id/expense_button"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:onClick="asdf" />
         <!--android:background="#CC006400"-->
 
     </LinearLayout>
