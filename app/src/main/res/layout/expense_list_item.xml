@@ -17,6 +17,12 @@
             android:text="Item Name Placeholder"
             android:id="@+id/expense_list_item_name" />
 
+        <ExpandableListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/expandableListView"
+            android:layout_gravity="center_horizontal" />
+
     </LinearLayout>
 
     <LinearLayout
