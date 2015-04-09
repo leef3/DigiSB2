@@ -23,6 +23,10 @@
                 <action android:name="android.intent.action.ListActivity" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ExpenseActivity"
+            android:label="@string/title_activity_expense" >
+        </activity>
     </application>
 
 </manifest>
