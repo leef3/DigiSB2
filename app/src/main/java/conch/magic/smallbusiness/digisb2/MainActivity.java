@@ -42,8 +42,16 @@ public class MainActivity extends ActionBarActivity {
 
 
     public boolean OnStockRoomItemSelected(View item){
-        startActivity(new Intent(MainActivity.this, ListActivity.class));
+        startActivity(new Intent(MainActivity.this, InventoryListActivity.class));
         return true;
     }
 
+    public boolean OnContactListItemSelected(View item){
+        startActivity(new Intent(MainActivity.this, ContactListActivity.class));
+        return true;
+    }
+    public boolean OnExpenseActivityItemSelected(View item){
+        startActivity(new Intent(MainActivity.this, ExpenseActivity.class));
+        return true;
+    }
 }
