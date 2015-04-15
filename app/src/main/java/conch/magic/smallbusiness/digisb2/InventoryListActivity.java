@@ -79,7 +79,7 @@ public class InventoryListActivity extends Activity {
         settings.commit();
     }
 
-    void loadData(){
+    void loadData() {
 /*
         SharedPreferences settings = this.getPreferences(MODE_PRIVATE);
         String objectData = settings.getString(GROUP_SAVE_NAME, "");
@@ -96,6 +96,6 @@ public class InventoryListActivity extends Activity {
         }
         else { System.out.println("No Objects!"); }
     }
-
 */
+    }
 }
