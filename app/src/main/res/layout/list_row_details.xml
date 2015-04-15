@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:paddingLeft="40dp"
+    tools:context=".MainActivity" >
+<!--         android:drawableLeft="@drawable/ic_launcher" -->
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+
+            <TextView
+                android:id="@+id/nameView"
+                android:layout_weight=".45"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:text="@string/hello_world"
+                android:textSize="14sp"
+                android:textStyle="bold" >
+            </TextView>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_weight="0.3"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="0"
+                android:id="@+id/countView"
+                android:editable="true"
+                android:focusable="true"
+                android:enabled="true"
+                android:inputType="number"
+                android:numeric="integer" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:id="@+id/inc"
+
+                android:layout_column="11"
+                android:onClick="inc" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+
+                android:id="@+id/dec"
+                android:layout_column="13"
+                android:onClick="dec" />
+        </TableRow>
+    </TableLayout>
+
+
+</LinearLayout>
