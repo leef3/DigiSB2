@@ -1,22 +1,56 @@
 package conch.magic.smallbusiness.digisb2;
 
-import android.app.ExpandableListActivity;
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ExpandableListAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 
-public class ExpenseActivity extends ExpandableListActivity {
+public class ExpenseActivity extends Activity {
 
-    private ExpandableListAdapter mAdapter;
+    private static ExpenseListAdapter mAdapter;
+    private static ArrayList<ExpenseObject> expenseList;
+    ListView lv;
+    Context context;
+    private static float expenseTotal;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.expense_main);
+        context = this;
+
+        expenseList = new ArrayList<ExpenseObject>();
+        fillExpenseList();
+
+        System.out.println(expenseList.size());
+        lv = (ListView)  findViewById(R.id.test_list);
+
+        TextView totalExpense = (TextView) findViewById(R.id.expense_total);
+        totalExpense.setText(Float.toString(expenseTotal));
+        ExpenseListAdapter mAdapter = new ExpenseListAdapter(this, expenseList);
+        lv.setAdapter(mAdapter);
+
     }
 
+    public static void fillExpenseList()
+    {
+        Random rand = new Random();
+        for(int x = 0; x < 25; x++)
+        {
+            float nextNum = rand.nextFloat() * 100;
+            ExpenseObject test = new ExpenseObject("Expense" + x, nextNum);
+            expenseList.add(test);
+            expenseTotal = expenseTotal + nextNum;
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
