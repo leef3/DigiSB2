@@ -7,46 +7,62 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.3">
+        android:layout_height="180dp"
+        android:weightSum="1">
 
         <TextView
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="10dp"
             android:gravity="center"
             android:textColor="#79CDCD"
             android:background="#70000000"
             android:textSize="30dp"
             android:text="Digital Business Assistant"
-            android:id="@+id/textView" />
+            android:id="@+id/textView"
+            android:layout_weight="0.86" />
+
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0px"
-        android:layout_weight="1"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/contact_table_view">
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="330dp"
+        android:orientation="vertical"
+        android:id="@+id/contact_table">
 
-
-        <TableLayout
+        <TableRow
             android:layout_width="fill_parent"
-            android:layout_height="383dp">
+            android:layout_height="fill_parent">
 
-            <TableRow
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
+            </LinearLayout>
+        </TableRow>
 
-                </LinearLayout>
-            </TableRow>
+    </TableLayout>
 
-        </TableLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
+        <Button
+            android:layout_width="166dp"
+            android:layout_height="wrap_content"
+            android:text="Add Contact"
+            android:id="@+id/add_contact"
+            android:onClick="displayContactPicker"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Contact"
+            android:id="@+id/create_button"
+            android:layout_weight="1"
+            android:onClick="onCreateContact" />
     </LinearLayout>
-    </LinearLayout>
+
+</LinearLayout>
