@@ -42,6 +42,13 @@ public class ExpenseActivity extends Activity {
         mAdapter = new ExpenseListAdapter(this, expenseList);
         lv.setAdapter(mAdapter);
 
+        final Button addButton = (Button) findViewById(R.id.add_expense_button);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ExpenseObject toAdd = new ExpenseObject("TEST ADD EXPENSE", 69.69);
+                addNewExpense(toAdd);
+            }
+        });
 
         final Button resetButton = (Button) findViewById(R.id.reset_expense_button);
         resetButton.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +56,6 @@ public class ExpenseActivity extends Activity {
                 clearExpenseList();
             }
         });
-
 
     }
 
@@ -66,7 +72,7 @@ public class ExpenseActivity extends Activity {
     }
     public static void addNewExpense(ExpenseObject toAdd)
     {
-        expenseList.add(toAdd);
+        expenseList.add(0, toAdd);
         expenseTotal = expenseTotal + toAdd.getAmount();
         totalExpense.setText(Double.toString(expenseTotal));
         mAdapter.notifyDataSetChanged();
