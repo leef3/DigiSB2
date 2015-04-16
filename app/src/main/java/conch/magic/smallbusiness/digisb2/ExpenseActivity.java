@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,9 +16,19 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Created by Fred on 4/15/2015.
+ */
 
 public class ExpenseActivity extends Activity {
 
@@ -30,6 +41,8 @@ public class ExpenseActivity extends Activity {
 
     private static int toRemoveId;
 
+    public static final String EXPENSE_SAVE_NAME = "DIGI_SB_2_EXPENSE_SAVE_NAME";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,16 +50,19 @@ public class ExpenseActivity extends Activity {
         context = this;
 
         expenseList = new ArrayList<ExpenseObject>();
-        fillExpenseList();
+        //fillExpenseList calls loadData() but was originally used to generate test objects
+        //fillExpenseList();
+        loadData();
 
-        System.out.println(expenseList.size());
+        //System.out.println(expenseList.size());
+        //Create the custom list adapter and populate it with the arraylist
         lv = (ListView)  findViewById(R.id.test_list);
-
         totalExpense = (TextView) findViewById(R.id.expense_total);
         totalExpense.setText(Double.toString(expenseTotal));
         mAdapter = new ExpenseListAdapter(this, expenseList);
         lv.setAdapter(mAdapter);
 
+        //OnItemLongClick used for deleting. Creates a dialog to confirm
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
         {
             public boolean onItemLongClick(AdapterView parent, View view, int position, long id) {
@@ -71,6 +87,8 @@ public class ExpenseActivity extends Activity {
             }
         });
 
+        //Button for Adding and expense. Opens up a dialog with layout expense_add_dialog.xml
+        //User enters Name of Expense and Amount
         final Button addButton = (Button) findViewById(R.id.add_expense_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -106,6 +124,7 @@ public class ExpenseActivity extends Activity {
             }
         });
 
+        //Reset button clears the list of expenses
         final Button resetButton = (Button) findViewById(R.id.reset_expense_button);
         resetButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -113,6 +132,7 @@ public class ExpenseActivity extends Activity {
             }
         });
     }
+    //Remove from List and subtract from total expense owed
     public static void removeItem()
     {
         expenseTotal = expenseTotal - expenseList.get(toRemoveId).getAmount();
@@ -120,6 +140,7 @@ public class ExpenseActivity extends Activity {
         totalExpense.setText(Double.toString(expenseTotal));
         mAdapter.notifyDataSetChanged();
     }
+    //Used for testing but now calls loadData for loading stored info
     public static void fillExpenseList()
     {
         Random rand = new Random();
@@ -131,6 +152,7 @@ public class ExpenseActivity extends Activity {
             expenseTotal = expenseTotal + test.getAmount();
         }
     }
+    //Adds new expense object to arraylist and adds it to total expense
     public static void addNewExpense(ExpenseObject toAdd)
     {
         expenseList.add(0, toAdd);
@@ -146,6 +168,31 @@ public class ExpenseActivity extends Activity {
         mAdapter.notifyDataSetChanged();
     }
 
+    void loadData() {
+        SharedPreferences settings = this.getPreferences(MODE_PRIVATE);
+        String objectData = settings.getString(EXPENSE_SAVE_NAME, "");
+        if (!objectData.equals("")) {
+            System.out.println("Object Data: " + objectData);
+            Gson gson = new Gson();
+            Type collectionType = new TypeToken<ArrayList<ExpenseObject>>() {
+            }.getType();
+            JsonArray jArray = new JsonParser().parse(objectData).getAsJsonArray();
+            for (JsonElement e : jArray) {
+                ExpenseObject c = gson.fromJson(e, ExpenseObject.class);
+                expenseList.add(c);
+                expenseTotal = expenseTotal + c.getAmount();
+            }
+        }
+    }
+
+    @Override protected void onPause(){
+        super.onPause();
+        SharedPreferences.Editor settings = this.getPreferences(MODE_PRIVATE).edit();
+        String data = new Gson().toJson(expenseList);
+        System.out.println("Data!: " + data);
+        settings.putString(EXPENSE_SAVE_NAME, data);
+        settings.commit();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
