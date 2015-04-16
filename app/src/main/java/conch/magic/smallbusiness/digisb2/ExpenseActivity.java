@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -27,6 +28,8 @@ public class ExpenseActivity extends Activity {
     private static double expenseTotal;
     private static TextView totalExpense;
 
+    private static int toRemoveId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,30 @@ public class ExpenseActivity extends Activity {
         totalExpense.setText(Double.toString(expenseTotal));
         mAdapter = new ExpenseListAdapter(this, expenseList);
         lv.setAdapter(mAdapter);
+
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            public boolean onItemLongClick(AdapterView parent, View view, int position, long id) {
+                toRemoveId = position;
+                AlertDialog.Builder confirmBuilder = new AlertDialog.Builder(ExpenseActivity.this);
+                confirmBuilder.setMessage("Confirm Delete");
+                // Set up the buttons
+                confirmBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                       removeItem();
+                    }
+                });
+                confirmBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                confirmBuilder.show();
+                return true;
+            }
+        });
 
         final Button addButton = (Button) findViewById(R.id.add_expense_button);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +112,13 @@ public class ExpenseActivity extends Activity {
                 clearExpenseList();
             }
         });
+    }
+    public static void removeItem()
+    {
+        expenseTotal = expenseTotal - expenseList.get(toRemoveId).getAmount();
+        expenseList.remove(toRemoveId);
+        totalExpense.setText(Double.toString(expenseTotal));
+        mAdapter.notifyDataSetChanged();
     }
     public static void fillExpenseList()
     {

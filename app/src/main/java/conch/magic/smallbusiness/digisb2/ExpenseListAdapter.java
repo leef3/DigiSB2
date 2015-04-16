@@ -27,10 +27,9 @@ public class ExpenseListAdapter extends BaseAdapter
         this.inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context = context;
     }
-    public void clear()
+    public void checkRecurring()
     {
-        expenseList.clear();
-        notifyDataSetChanged();
+        //CALCULATE DATE DIFFERENCE WHETHER TO ADD OR NOT
     }
 
     public int getCount() {
