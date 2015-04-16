@@ -1,17 +1,19 @@
 package conch.magic.smallbusiness.digisb2;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.math.RoundingMode;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -21,7 +23,7 @@ public class ExpenseActivity extends Activity {
     private static ExpenseListAdapter mAdapter;
     private static ArrayList<ExpenseObject> expenseList;
     private static ListView lv;
-    Context context;
+    private static Context context;
     private static double expenseTotal;
     private static TextView totalExpense;
 
@@ -45,8 +47,35 @@ public class ExpenseActivity extends Activity {
         final Button addButton = (Button) findViewById(R.id.add_expense_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                ExpenseObject toAdd = new ExpenseObject("TEST ADD EXPENSE", 69.69);
-                addNewExpense(toAdd);
+                //ExpenseObject toAdd = new ExpenseObject("TEST ADD", 69.69);
+
+                LayoutInflater li = LayoutInflater.from(context);
+                View promptsView = li.inflate(R.layout.expense_add_dialog, null);
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setView(promptsView);
+                //builder.setTitle("Add New Expense");
+
+                // Set up the input
+                final EditText inputName = (EditText) promptsView.findViewById(R.id.expense_dialog_name_input);
+                final EditText inputAmount = (EditText) promptsView.findViewById(R.id.expense_dialog_amount_input);
+
+                // Set up the buttons
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String userInputName = inputName.getText().toString();
+                        double userInputAmount = Double.parseDouble(inputAmount.getText().toString());
+                        ExpenseObject toAdd = new ExpenseObject(userInputName, userInputAmount);
+                        addNewExpense(toAdd);
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.show();
             }
         });
 
@@ -56,9 +85,7 @@ public class ExpenseActivity extends Activity {
                 clearExpenseList();
             }
         });
-
     }
-
     public static void fillExpenseList()
     {
         Random rand = new Random();
