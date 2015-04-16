@@ -32,8 +32,8 @@
             android:layout_width="0px"
             android:layout_weight="1"
             android:layout_margin="30px"
-            android:layout_height="fill_parent"
-            android:text="Employee"
+            android:layout_height="wrap_content"
+            android:background="@drawable/employee"
             android:id="@+id/employee_button"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_gravity="center_vertical"
@@ -45,13 +45,20 @@
             android:layout_weight="1"
             android:layout_margin="30px"
             android:layout_height="fill_parent"
-            android:text="Business Contacts"
+            android:background="@drawable/contact"
             android:id="@+id/contacts_button"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_gravity="center_vertical"
             android:onClick="OnContactListItemSelected" />
         <!--android:background="#CC008080"-->
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.30"
+        android:layout_gravity="center_horizontal"></LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -65,7 +72,7 @@
             android:layout_weight="1"
             android:layout_margin="30px"
             android:layout_height="fill_parent"
-            android:text="Stock Room"
+            android:background="@drawable/stockroom"
             android:id="@+id/stockroom_button"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_gravity="center_vertical"
@@ -79,7 +86,7 @@
             android:layout_weight="1"
             android:layout_margin="30px"
             android:layout_height="fill_parent"
-            android:text="Expenses"
+            android:background="@drawable/expense"
             android:id="@+id/expense_button"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_gravity="center_vertical"

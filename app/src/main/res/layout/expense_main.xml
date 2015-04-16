@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add Expense"
+            android:textColor ="#FFFFFF"
             android:id="@+id/add_expense_button"
             android:layout_weight="1"
             android:layout_gravity="center_horizontal" />
@@ -22,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Reset Expenses"
+            android:textColor ="#FFFFFF"
             android:layout_weight="1"
             android:id="@+id/reset_expense_button" />
 
@@ -40,6 +42,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Total Expense"
+        android:textColor ="#FFFFFF"
         android:id="@+id/expense_total"
         android:layout_gravity="center_horizontal" />
 
@@ -63,6 +66,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Date Added"
+            android:textColor ="#FFFFFF"
             android:gravity="center_horizontal" />
 
         <TextView
@@ -71,6 +75,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Expense Title"
+            android:textColor ="#FFFFFF"
             android:gravity="center_horizontal" />
 
         <TextView
@@ -79,6 +84,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Amount"
+            android:textColor ="#FFFFFF"
             android:gravity="center_horizontal" />
 
         </LinearLayout>

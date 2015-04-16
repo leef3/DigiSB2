@@ -173,6 +173,7 @@ public class ExpenseActivity extends Activity {
 
     void loadData() {
         SharedPreferences settings = this.getPreferences(MODE_PRIVATE);
+        double tempExpenseTotal = 0;
         String objectData = settings.getString(EXPENSE_SAVE_NAME, "");
         if (!objectData.equals("")) {
             System.out.println("Object Data: " + objectData);
@@ -183,9 +184,10 @@ public class ExpenseActivity extends Activity {
             for (JsonElement e : jArray) {
                 ExpenseObject c = gson.fromJson(e, ExpenseObject.class);
                 expenseList.add(c);
-                expenseTotal = expenseTotal + c.getAmount();
+                tempExpenseTotal = tempExpenseTotal + c.getAmount();
             }
         }
+        expenseTotal = tempExpenseTotal;
     }
 
     @Override protected void onPause(){
