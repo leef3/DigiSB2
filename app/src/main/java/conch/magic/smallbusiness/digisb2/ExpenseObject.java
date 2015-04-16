@@ -30,7 +30,7 @@ public class ExpenseObject
         SimpleDateFormat dateForm = new SimpleDateFormat("dd-MM-yyyy");
         this.date = dateForm.format(c.getTime());
         this.name = name;
-        this.amount = Double.parseDouble(numberFormat.format(amount));
+        this.amount = amount;
     }
 
     String getName(){ return name;}

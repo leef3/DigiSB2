@@ -23,6 +23,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -109,7 +110,9 @@ public class ExpenseActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String userInputName = inputName.getText().toString();
-                        double userInputAmount = Double.parseDouble(inputAmount.getText().toString());
+                        DecimalFormat decFormat = new DecimalFormat("0.00");
+
+                        double userInputAmount = Double.parseDouble(decFormat.format(Double.parseDouble(inputAmount.getText().toString())));
                         ExpenseObject toAdd = new ExpenseObject(userInputName, userInputAmount);
                         addNewExpense(toAdd);
                     }

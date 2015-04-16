@@ -8,7 +8,8 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#81DAF5">
+        android:paddingTop = "5dp"
+        android:background="@drawable/customshape">
 
     <LinearLayout
         android:orientation="vertical"
@@ -20,9 +21,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Date"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/expense_list_item_date"
             android:layout_gravity="center_horizontal"
-            android:padding="3dp" />
+            android:padding="10dp" />
 
     </LinearLayout>
 
@@ -37,9 +39,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Expense Name"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/expense_list_item_name"
             android:layout_gravity="center_horizontal"
-            android:padding="3dp" />
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
 
     </LinearLayout>
 
@@ -53,7 +57,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="$ "
             android:gravity="center" />
 
@@ -61,19 +65,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Amount"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/expense_list_item_amount"
-            android:padding="3dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:gravity="center" />
 
     </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_gravity="bottom"
-        android:background="#000000"></LinearLayout>
 </LinearLayout>
 
 
