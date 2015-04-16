@@ -4,7 +4,10 @@ package conch.magic.smallbusiness.digisb2;
  * Created by Michael on 3/5/2015.
  */
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -15,16 +18,23 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MyExpandableListAdapter extends BaseExpandableListAdapter {
+import java.util.HashMap;
 
-    private final SparseArray<Group> groups;
+/* Manages the Inventory List */
+
+
+public class MyExpandableListAdapter extends BaseExpandableListAdapter {
+    private final HashMap<Integer, Group> groups; //HOlds Category
     public LayoutInflater inflater;
     public Activity activity;
 
-    public MyExpandableListAdapter(Activity act, SparseArray<Group> groups) {
+    public MyExpandableListAdapter(Activity act, HashMap<Integer,Group> groups) {
         activity = act;
         this.groups = groups;
         inflater = act.getLayoutInflater();
@@ -39,7 +49,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     public long getChildId(int groupPosition, int childPosition) {
         return 0;
     }
-
+    /* Get and setup the actual inventory item in a group */
     @Override
     public View getChildView(int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
@@ -56,8 +66,8 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         count.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
-
-                InventoryGroupItem i = (InventoryGroupItem)count.getTag();
+                if (count.getTag() == null) return;
+                GroupItem i = (GroupItem)count.getTag();
                 i.setValue(Integer.parseInt(count.getText().toString()));
             }
 
@@ -74,30 +84,120 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         convertView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(activity, children.getName(),
-                        Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                builder.setTitle("Change Inventory Name");
+
+// Set up the input
+                final EditText convertInput = new EditText(activity);
+                convertInput.setTag(v.findViewById(R.id.nameView));
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                convertInput.setInputType(InputType.TYPE_CLASS_TEXT);
+                builder.setView(convertInput);
+
+// Set up the buttons
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ((TextView)convertInput.getTag()).setText(convertInput.getText().toString());
+                        children.name = convertInput.getText().toString();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                builder.show();
+
             }
+
+
+
         });
 
         convertView.setTag(children);
 
         return convertView;
     }
+    /* Get and setup the category */
+    @Override
+    public View getGroupView(int groupPosition, boolean isExpanded,
+                             View convertView, ViewGroup parent) {
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.list_row_group, null);
+        }
+        convertView.setTag(new Integer(groupPosition));
+        Group group = (Group) getGroup(groupPosition);
 
+        Button plusButton = (Button)convertView.findViewById(R.id.addToCat);
+        plusButton.setTag(group);
+        plusButton.setOnClickListener(new OnClickListener() {
+                                          @Override
+                                          public void onClick(View v) {
+                                              ((Group)((Button)v).getTag()).children.add(new GroupItem("New Item", ((Group)((Button)v).getTag()).children.size() ));
+                                              notifyDataSetChanged();
+                                              ((ExpandableListView)activity.findViewById(R.id.listView)).expandGroup(((Group)((Button)v).getTag()).row);
+                                          }
+                                      }
+
+        );
+
+        convertView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ExpandableListView listView = (ExpandableListView) activity.findViewById(R.id.listView);
+                System.out.println(listView);
+                CheckedTextView ctv = (CheckedTextView)v.findViewById(R.id.categoryNameView);
+                System.out.println(ctv);
+                if (!ctv.isChecked())
+                    listView.expandGroup((int)v.getTag());
+                else listView.collapseGroup((int)v.getTag());
+            }
+        });
+        CheckedTextView checkedView = (CheckedTextView)convertView.findViewById(R.id.categoryNameView);
+        checkedView.setTag(group);
+        checkedView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                builder.setTitle("Change Category Name");
+
+// Set up the input
+                final EditText input = new EditText(activity);
+                input.setTag(v);
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+                builder.setView(input);
+
+// Set up the buttons
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ((CheckedTextView) input.getTag()).setText(input.getText().toString());
+                        ((Group) ((CheckedTextView) input.getTag()).getTag()).string = input.getText().toString();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                builder.show();
+
+            }
+        });
+        checkedView.setText(group.string);
+        checkedView.setChecked(isExpanded);
+        return convertView;
+    }
     @Override
     public int getChildrenCount(int groupPosition) {
         return groups.get(groupPosition).children.size();
-    }
-
-    public void inc(Button button){
-        InventoryGroupItem item = (InventoryGroupItem) button.getTag();
-        item.increase();
-        button.setText( "" + item.getValue() );
-    }
-    public void dec(Button button){
-        InventoryGroupItem item = (InventoryGroupItem) button.getTag();
-        item.decrease();
-        button.setText( "" + item.getValue() );
     }
 
     @Override
@@ -120,22 +220,12 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         super.onGroupExpanded(groupPosition);
     }
 
+
     @Override
     public long getGroupId(int groupPosition) {
         return 0;
     }
 
-    @Override
-    public View getGroupView(int groupPosition, boolean isExpanded,
-                             View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.list_row_group, null);
-        }
-        Group group = (Group) getGroup(groupPosition);
-        ((CheckedTextView) convertView).setText(group.string);
-        ((CheckedTextView) convertView).setChecked(isExpanded);
-        return convertView;
-    }
 
     @Override
     public boolean hasStableIds() {

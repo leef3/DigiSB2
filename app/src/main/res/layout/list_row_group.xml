@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
     <!--     android:drawableRight="@drawable/ic_launcher"
- -->
+
 <CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/textView1"
@@ -15,3 +15,49 @@
     android:textSize="14sp"
     android:textAlignment="textEnd"
     android:textStyle="bold" />
+ -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:clickable="true"
+    android:onClick="onGroupClicked"
+    android:id="@+id/listRowGroup"
+    android:orientation="vertical"
+    android:paddingLeft="40dp"
+    tools:context=".MainActivity" >
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+
+    <CheckedTextView
+        android:id="@+id/categoryNameView"
+        android:layout_weight=".45"
+        android:layout_height="wrap_content"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:text="@string/hello_world"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:clickable="true"
+        android:checked="false">
+    </CheckedTextView>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:id="@+id/addToCat"
+            android:layout_column="13" />
+            <!-- android:onClick="addInventoryToCategory" --> />
+    </TableRow>
+    </TableLayout>
+
+</LinearLayout>
