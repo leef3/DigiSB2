@@ -36,7 +36,7 @@
             android:layout_marginRight="5dp"
             android:id="@+id/button5"
             android:layout_weight="1"
-            android:onClick="onCreateContact" />
+            android:onClick="addNewCategory" />
 
     </LinearLayout>
 
