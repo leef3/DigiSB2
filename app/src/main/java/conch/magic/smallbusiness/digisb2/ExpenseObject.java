@@ -1,5 +1,8 @@
 package conch.magic.smallbusiness.digisb2;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -8,26 +11,29 @@ import java.util.Calendar;
  */
 public class ExpenseObject
 {
-    String date, name;
-    float amount;
+    private String date, name;
+    private double amount;
     //CONSTRUCTOR USED LATER ON IF NEED TO ADD CUSTOM DATE
-    ExpenseObject(String date, String name, float amount)
+    ExpenseObject(String date, String name, double amount)
     {
         this.date = date;
         this.name = name;
         this.amount = amount;
     }
     //CONSTRUCTOR USED FOR SIMPLER VERSION WHERE DATE = DATE/TIME ADDED
-    ExpenseObject(String name, float amount)
+    ExpenseObject(String name, double amount)
     {
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        numberFormat.setRoundingMode(RoundingMode.HALF_UP);
+        numberFormat.setMaximumFractionDigits(2);
         Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-        this.date = df.format(c.getTime());
+        SimpleDateFormat dateForm = new SimpleDateFormat("dd-MM-yyyy");
+        this.date = dateForm.format(c.getTime());
         this.name = name;
-        this.amount = amount;
+        this.amount = Double.parseDouble(numberFormat.format(amount));
     }
 
     String getName(){ return name;}
-    float getAmount(){ return amount;}
+    double getAmount(){ return amount;}
     String getDate(){ return date;}
 }

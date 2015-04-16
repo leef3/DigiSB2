@@ -5,11 +5,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 
@@ -17,9 +20,10 @@ public class ExpenseActivity extends Activity {
 
     private static ExpenseListAdapter mAdapter;
     private static ArrayList<ExpenseObject> expenseList;
-    ListView lv;
+    private static ListView lv;
     Context context;
-    private static float expenseTotal;
+    private static double expenseTotal;
+    private static TextView totalExpense;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +37,19 @@ public class ExpenseActivity extends Activity {
         System.out.println(expenseList.size());
         lv = (ListView)  findViewById(R.id.test_list);
 
-        TextView totalExpense = (TextView) findViewById(R.id.expense_total);
-        totalExpense.setText(Float.toString(expenseTotal));
-        ExpenseListAdapter mAdapter = new ExpenseListAdapter(this, expenseList);
+        totalExpense = (TextView) findViewById(R.id.expense_total);
+        totalExpense.setText(Double.toString(expenseTotal));
+        mAdapter = new ExpenseListAdapter(this, expenseList);
         lv.setAdapter(mAdapter);
+
+
+        final Button resetButton = (Button) findViewById(R.id.reset_expense_button);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                clearExpenseList();
+            }
+        });
+
 
     }
 
@@ -45,11 +58,25 @@ public class ExpenseActivity extends Activity {
         Random rand = new Random();
         for(int x = 0; x < 25; x++)
         {
-            float nextNum = rand.nextFloat() * 100;
+            double nextNum = rand.nextDouble() * 100;
             ExpenseObject test = new ExpenseObject("Expense" + x, nextNum);
             expenseList.add(test);
-            expenseTotal = expenseTotal + nextNum;
+            expenseTotal = expenseTotal + test.getAmount();
         }
+    }
+    public static void addNewExpense(ExpenseObject toAdd)
+    {
+        expenseList.add(toAdd);
+        expenseTotal = expenseTotal + toAdd.getAmount();
+        totalExpense.setText(Double.toString(expenseTotal));
+        mAdapter.notifyDataSetChanged();
+    }
+    public static void clearExpenseList()
+    {
+        expenseList.clear();
+        expenseTotal = 0.00;
+        totalExpense.setText(Double.toString(expenseTotal));
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

@@ -27,6 +27,11 @@ public class ExpenseListAdapter extends BaseAdapter
         this.inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context = context;
     }
+    public void clear()
+    {
+        expenseList.clear();
+        notifyDataSetChanged();
+    }
 
     public int getCount() {
         return expenseList.size();
@@ -59,7 +64,7 @@ public class ExpenseListAdapter extends BaseAdapter
         ExpenseObject expenseItem = expenseList.get(position);
         holder.date.setText(expenseItem.getDate());
         holder.name.setText(expenseItem.getName());
-        holder.amount.setText(Float.toString(expenseItem.getAmount()));
+        holder.amount.setText(Double.toString(expenseItem.getAmount()));
 
         return convertView;
     }
