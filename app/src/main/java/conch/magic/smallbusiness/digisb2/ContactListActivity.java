@@ -94,8 +94,9 @@ public class ContactListActivity extends Activity {
         TableRow row = new TableRow(this);
         TextView nameView = new TextView(this);
         nameView.setText(c.name);
-        nameView.setBackgroundColor(0xFFFFFF);
-        nameView.setPadding(10,10,10,10);
+
+        row.setBackgroundColor(0xFFFFFF);
+        row.setPadding(10,10,10,10);
         row.setTag(c);
 
         row.addView(nameView);

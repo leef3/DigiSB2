@@ -131,7 +131,22 @@ public class ExpenseActivity extends Activity {
         final Button resetButton = (Button) findViewById(R.id.reset_expense_button);
         resetButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                clearExpenseList();
+                AlertDialog.Builder confirmBuilder = new AlertDialog.Builder(ExpenseActivity.this);
+                confirmBuilder.setMessage("Confirm Full Expense Reset");
+                // Set up the buttons
+                confirmBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        clearExpenseList();
+                    }
+                });
+                confirmBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                confirmBuilder.show();
             }
         });
     }

@@ -24,8 +24,10 @@
 
     <TableLayout
         android:layout_width="fill_parent"
-        android:layout_height="400dp"
+        android:layout_height="450dp"
         android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:id="@+id/contact_table">
 
         <TableRow
