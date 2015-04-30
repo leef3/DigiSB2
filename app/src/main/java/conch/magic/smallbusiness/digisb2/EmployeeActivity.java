@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.google.gson.Gson;
@@ -32,14 +31,18 @@ import java.util.Random;
  * Created by Fred on 4/30/2015.
  */
 
+//Main activity for managing Employee UI and keeping the list of current employees, functions for adding and deleting and saving
+
 public class EmployeeActivity extends Activity {
 
+    //Variables for list
     private static EmployeeListAdapter mAdapter;
     private static ArrayList<Employee> employeeList;
     private static ListView lv;
     private static Context context;
     private static int toRemoveId;
 
+    //Key for saving Employee info to Shared Preferences
     public static final String EMPLOYEE_SAVE_NAME = "DIGI_SB_2_EMPLOYEE_SAVE_NAME";
 
     @Override
@@ -48,9 +51,9 @@ public class EmployeeActivity extends Activity {
         setContentView(R.layout.employee_main);
         context = this;
 
+        //Load data from existing source
         employeeList = new ArrayList<Employee>();
         loadData();
-
 
         //Create the custom list adapter and populate it with the arraylist
         lv = (ListView)  findViewById(R.id.employee_list);
@@ -112,28 +115,32 @@ public class EmployeeActivity extends Activity {
                         DecimalFormat decFormat = new DecimalFormat("0.00");
 
                         double userInputAmount = Double.parseDouble(decFormat.format(Double.parseDouble(inputPay.getText().toString())));
-                        //Employee toAdd = new Employee(userInputName, userInputAmount, mondayToggle.isChecked(), tuesdayToggle.isChecked(), wednesdayToggle.isChecked(), thursdayToggle.isChecked(), fridayToggle.isChecked());
 
+                        //Set variables to null for now and replace them later if the toggle button is set
                         String addMonday = " ";
                         String addTuesday = " ";
                         String addWednesday = " ";
                         String addThursday = " ";
                         String addFriday = " ";
+                        //Check the toggle buttons and set variables
                         if(mondayToggle.isChecked()) { addMonday = "M"; }
                         if(tuesdayToggle.isChecked()) { addTuesday = "T"; }
                         if(wednesdayToggle.isChecked()) { addWednesday = "W"; }
                         if(thursdayToggle.isChecked()) { addThursday = "R"; }
                         if(fridayToggle.isChecked()) { addFriday = "F"; }
+                        //Create a new employee object using the variables taken from the dialog.
                         Employee toAdd = new Employee(userInputName, userInputAmount, addMonday, addTuesday, addWednesday, addThursday, addFriday);
                         addNewEmployee(toAdd);
                     }
                 });
+                //Cancel if user selects cancel
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });
+                //Show the dialog
                 builder.show();
             }
         });
@@ -144,14 +151,15 @@ public class EmployeeActivity extends Activity {
         employeeList.remove(toRemoveId);
         mAdapter.notifyDataSetChanged();
     }
-
     //Adds new employee
     public static void addNewEmployee(Employee toAdd)
     {
         employeeList.add(0, toAdd);
+        //Refresh List
         mAdapter.notifyDataSetChanged();
     }
 
+    //Initial load of exisitng data from SharedPreferences
     void loadData() {
         SharedPreferences settings = this.getPreferences(MODE_PRIVATE);
         String objectData = settings.getString(EMPLOYEE_SAVE_NAME, "");
@@ -168,6 +176,7 @@ public class EmployeeActivity extends Activity {
         }
     }
 
+    //Save ArrayList of Employees
     @Override protected void onPause(){
         super.onPause();
         SharedPreferences.Editor settings = this.getPreferences(MODE_PRIVATE).edit();
@@ -176,13 +185,14 @@ public class EmployeeActivity extends Activity {
         settings.putString(EMPLOYEE_SAVE_NAME, data);
         settings.commit();
     }
+    //Not realy used but Android requires us to implement this
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         //getMenuInflater().inflate(R.menu.menu_employee, menu);
         return true;
     }
-
+    //Not realy used but Android requires us to implement this
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

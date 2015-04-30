@@ -32,21 +32,27 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Created by Moo on 4/8/15.
  */
+
+//The main activity of the Contact List menu. Will handle adding and interfacing with Android Addres Book
 public class ContactListActivity extends Activity {
 
+    //Enums and keys for saving to SharedPreferences
     private static final int CONTACT_PICKER_RESULT = 1001;
     private static final String DEBUG_TAG = "Digisb2";
     public static final String CONTACT_SAVE_NAME = "CONTACT_LIST_DATA";
     public static final int ADD_NEW_CONTACT = 100;
+
+    // our collections of contacts
     private HashSet<Contact> contacts;
 
+    //Starts the Intent to open Android Address book
     public void doLaunchContactPicker(View view) {
         Intent contactPickerIntent = new Intent(Intent.ACTION_PICK,
                 Contacts.CONTENT_URI);
         startActivityForResult(contactPickerIntent, CONTACT_PICKER_RESULT);
 
     }
-
+    //Where we save the contact info when the screen goes out of focus
     @Override protected void onPause(){
         super.onPause();
         SharedPreferences.Editor settings = this.getPreferences(MODE_PRIVATE).edit();
@@ -58,6 +64,7 @@ public class ContactListActivity extends Activity {
 
 
     @Override
+    //Load data and load the UI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
@@ -65,6 +72,7 @@ public class ContactListActivity extends Activity {
         loadData();
     }
 
+    //Load data if it already exists from SharedPreference memory
     void loadData(){
         SharedPreferences settings = this.getPreferences(MODE_PRIVATE);
         String objectData = settings.getString(CONTACT_SAVE_NAME, "");
@@ -78,28 +86,32 @@ public class ContactListActivity extends Activity {
                 Contact c = gson.fromJson(e, Contact.class);
                 contacts.add(c);
                 addContactToTable(c);
-
             }
         }
         else { System.out.println("No Objects!"); }
     }
 
+    //Calls the method from above that interfaces with Android address book
     public boolean displayContactPicker(View b){
         doLaunchContactPicker(null);
         return true;
     }
 
+    //Method to create a view, create a row to hold the view, and insert the row into the existing contact table
     void addContactToTable(Contact c){
         TableLayout table = (TableLayout) findViewById(R.id.contact_table);
         TableRow row = new TableRow(this);
+        row.setLayoutParams(new TableLayout.LayoutParams( TableLayout.LayoutParams.FILL_PARENT,TableLayout.LayoutParams.WRAP_CONTENT));
         TextView nameView = new TextView(this);
         nameView.setText(c.name);
 
+        //Styling for the new view programmatically
         row.setBackgroundColor(0xFFFFFF);
         row.setPadding(10,10,10,10);
         row.setTag(c);
 
         row.addView(nameView);
+        //Set the on click listener to create the name changing dialog when the category name is clicked.
         row.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,10 +121,12 @@ public class ContactListActivity extends Activity {
                 startActivity(editIntent);
             }
         });
+        //Add the view to the UI
         table.addView(row);
     }
 
     // Called from the contactPicker Intent when it finds a contact.
+    //SWITCH CASE STATEMENT FOR RESULT CODE
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {

@@ -147,11 +147,5 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="#000000"></LinearLayout>
-
 
 </LinearLayout>

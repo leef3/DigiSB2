@@ -11,28 +11,24 @@ import java.util.Calendar;
  */
 public class ExpenseObject
 {
+    //Expense has date added, name which is to whom or for what, and amount which is a double
     private String date, name;
     private double amount;
-    //CONSTRUCTOR USED LATER ON IF NEED TO ADD CUSTOM DATE
-    ExpenseObject(String date, String name, double amount)
-    {
-        this.date = date;
-        this.name = name;
-        this.amount = amount;
-    }
-    //CONSTRUCTOR USED FOR SIMPLER VERSION WHERE DATE = DATE/TIME ADDED
+
+    //CONSTRUCTOR
     ExpenseObject(String name, double amount)
     {
-        NumberFormat numberFormat = NumberFormat.getInstance();
-        numberFormat.setRoundingMode(RoundingMode.HALF_UP);
-        numberFormat.setMaximumFractionDigits(2);
+        //Convert Date to DD/MM/YYYY
         Calendar c = Calendar.getInstance();
         SimpleDateFormat dateForm = new SimpleDateFormat("dd-MM-yyyy");
+
+        //Set the date to add date, name and amount
         this.date = dateForm.format(c.getTime());
         this.name = name;
         this.amount = amount;
     }
 
+    //Getters (we dont need setters because that is done a single time in the constructor
     String getName(){ return name;}
     double getAmount(){ return amount;}
     String getDate(){ return date;}
