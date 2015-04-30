@@ -25,6 +25,8 @@
     android:onClick="onGroupClicked"
     android:id="@+id/listRowGroup"
     android:orientation="vertical"
+    android:background = "#ffffff"
+    android:alpha = "0.5"
     android:paddingLeft="40dp"
     tools:context=".MainActivity" >
     <TableLayout

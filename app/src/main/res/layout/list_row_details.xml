@@ -5,6 +5,8 @@
     android:layout_height="40dp"
     android:clickable="true"
     android:orientation="vertical"
+    android:background = "#ffffff"
+    android:alpha = "0.5"
     android:paddingLeft="40dp"
     tools:context=".MainActivity" >
 <!--         android:drawableLeft="@drawable/ic_launcher" -->

@@ -9,7 +9,38 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity"
+    android:background="@drawable/background"
     android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Business StockRoom"
+        android:textColor ="#FFFFFF"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#000000"></LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Category"
+            android:layout_marginRight="5dp"
+            android:id="@+id/button5"
+            android:textColor="#ffffff"
+            android:onClick="addNewCategory" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
@@ -23,21 +54,6 @@
         </ExpandableListView>
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-       >
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Add Category"
-            android:layout_marginRight="5dp"
-            android:id="@+id/button5"
-            android:layout_weight="1"
-            android:onClick="addNewCategory" />
-
-    </LinearLayout>
 
 </LinearLayout>

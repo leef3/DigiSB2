@@ -8,6 +8,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/customshape"
         android:layout_margin="3dp">
 
         <LinearLayout
@@ -65,48 +66,48 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="M"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/employee_list_item_monday"
                 android:layout_gravity="center_horizontal"
                 android:visibility="visible"
+                android:textColor="#330033"
                 android:padding= "5dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="T"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/employee_list_item_tuesday"
                 android:layout_gravity="center_horizontal"
                 android:padding= "5dp"
+                android:textColor="#330033"
                 android:visibility="visible" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="W"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/employee_list_item_wednesday"
                 android:layout_gravity="center_horizontal"
                 android:visibility="visible"
+                android:textColor="#330033"
                 android:padding= "5dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="R"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/employee_list_item_thursday"
                 android:layout_gravity="center_horizontal"
                 android:visibility="visible"
+                android:textColor="#330033"
                 android:padding= "5dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="F"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/employee_list_item_friday"
                 android:layout_gravity="center_horizontal"
                 android:visibility="visible"
+                android:textColor="#330033"
                 android:padding= "5dp" />
 
 

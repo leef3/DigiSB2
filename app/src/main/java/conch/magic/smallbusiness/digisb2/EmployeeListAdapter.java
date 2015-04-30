@@ -62,27 +62,40 @@ public class EmployeeListAdapter extends BaseAdapter
         holder.pay.setText(Double.toString(employeeItem.getPay()));
         holder.name.setText(employeeItem.getName());
 
-        if(!employeeItem.getMonday())
-        {
-            holder.monday.setVisibility(View.INVISIBLE);
-        }
-        if(!employeeItem.getTuesday())
-        {
-            holder.tuesday.setVisibility(View.INVISIBLE);
-        }
-        if(!employeeItem.getWednesday())
-        {
-            holder.wednesday.setVisibility(View.INVISIBLE);
-        }
-        if(!employeeItem.getThursday())
-        {
-            holder.thursday.setVisibility(View.INVISIBLE);
-        }
-        if(!employeeItem.getFriday())
-        {
-            holder.friday.setVisibility(View.INVISIBLE);
-        }
+        holder.monday.setText(employeeItem.getMonday());
+        holder.tuesday.setText(employeeItem.getTuesday());
+        holder.wednesday.setText(employeeItem.getWednesday());
+        holder.thursday.setText(employeeItem.getThursday());
+        holder.friday.setText(employeeItem.getFriday());
 
+
+        /*
+        if(employeeItem.getMonday())
+        {
+            //holder.monday.setVisibility(View.INVISIBLE);
+            holder.monday.setText("M");
+        }
+        if(employeeItem.getTuesday())
+        {
+            //holder.tuesday.setVisibility(View.INVISIBLE);
+            holder.monday.setText("T");
+        }
+        if(employeeItem.getWednesday())
+        {
+           // holder.wednesday.setVisibility(View.INVISIBLE);
+            holder.wednesday.setText("W");
+        }
+        if(employeeItem.getThursday())
+        {
+           // holder.thursday.setVisibility(View.INVISIBLE);
+            holder.thursday.setText("R");
+        }
+        if(employeeItem.getFriday())
+        {
+          //  holder.friday.setVisibility(View.INVISIBLE);
+            holder.friday.setText("F");
+        }
+*/
 
 
         return convertView;

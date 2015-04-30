@@ -13,10 +13,10 @@ public class Employee
 {
     private String name;
     private double pay;
-    private boolean monday, tuesday, wednesday, thursday, friday;
+    private String monday, tuesday, wednesday, thursday, friday;
 
     //Constructor
-    Employee(String name, double pay, boolean mon, boolean tues, boolean wed, boolean thurs, boolean fri)
+    Employee(String name, double pay, String mon, String tues, String wed, String thurs, String fri)
     {
         this.name = name;
         this.pay = pay;
@@ -29,9 +29,9 @@ public class Employee
 
     String getName(){ return name;}
     double getPay(){ return pay;}
-    boolean getMonday(){ return monday;}
-    boolean getTuesday(){ return tuesday;}
-    boolean getWednesday(){ return wednesday;}
-    boolean getThursday(){ return thursday;}
-    boolean getFriday(){ return friday;}
+    String getMonday(){ return monday;}
+    String getTuesday(){ return tuesday;}
+    String getWednesday(){ return wednesday;}
+    String getThursday(){ return thursday;}
+    String getFriday(){ return friday;}
 }

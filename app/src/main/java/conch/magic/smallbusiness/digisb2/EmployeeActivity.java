@@ -112,7 +112,19 @@ public class EmployeeActivity extends Activity {
                         DecimalFormat decFormat = new DecimalFormat("0.00");
 
                         double userInputAmount = Double.parseDouble(decFormat.format(Double.parseDouble(inputPay.getText().toString())));
-                        Employee toAdd = new Employee(userInputName, userInputAmount, mondayToggle.isChecked(), tuesdayToggle.isChecked(), wednesdayToggle.isChecked(), thursdayToggle.isChecked(), fridayToggle.isChecked());
+                        //Employee toAdd = new Employee(userInputName, userInputAmount, mondayToggle.isChecked(), tuesdayToggle.isChecked(), wednesdayToggle.isChecked(), thursdayToggle.isChecked(), fridayToggle.isChecked());
+
+                        String addMonday = " ";
+                        String addTuesday = " ";
+                        String addWednesday = " ";
+                        String addThursday = " ";
+                        String addFriday = " ";
+                        if(mondayToggle.isChecked()) { addMonday = "M"; }
+                        if(tuesdayToggle.isChecked()) { addTuesday = "T"; }
+                        if(wednesdayToggle.isChecked()) { addWednesday = "W"; }
+                        if(thursdayToggle.isChecked()) { addThursday = "R"; }
+                        if(fridayToggle.isChecked()) { addFriday = "F"; }
+                        Employee toAdd = new Employee(userInputName, userInputAmount, addMonday, addTuesday, addWednesday, addThursday, addFriday);
                         addNewEmployee(toAdd);
                     }
                 });
