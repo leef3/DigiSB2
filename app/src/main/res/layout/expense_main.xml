@@ -7,11 +7,15 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:gravity="center"
+        android:textColor="#79CDCD"
+        android:background="#70000000"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Business Expenses"
-        android:textColor ="#FFFFFF"
         android:layout_gravity="center_horizontal" />
 
     <LinearLayout
