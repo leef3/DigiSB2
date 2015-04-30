@@ -37,6 +37,7 @@
             android:id="@+id/employee_button"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_gravity="center_vertical"
+            android:onClick="OnEmployeeListItemSelected"
             android:clickable="true" />
         <!--android:background="#CCDC143C"-->
 

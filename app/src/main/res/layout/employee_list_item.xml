@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="3dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/employee_list_item_name"
+                android:layout_gravity="center_horizontal"
+                android:padding="10dp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="$ "
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pay"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/employee_list_item_pay"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:gravity="center" />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="M"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/employee_list_item_monday"
+                android:layout_gravity="center_horizontal"
+                android:visibility="visible"
+                android:padding= "5dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="T"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/employee_list_item_tuesday"
+                android:layout_gravity="center_horizontal"
+                android:padding= "5dp"
+                android:visibility="visible" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="W"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/employee_list_item_wednesday"
+                android:layout_gravity="center_horizontal"
+                android:visibility="visible"
+                android:padding= "5dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="R"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/employee_list_item_thursday"
+                android:layout_gravity="center_horizontal"
+                android:visibility="visible"
+                android:padding= "5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="F"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/employee_list_item_friday"
+                android:layout_gravity="center_horizontal"
+                android:visibility="visible"
+                android:padding= "5dp" />
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
+
+

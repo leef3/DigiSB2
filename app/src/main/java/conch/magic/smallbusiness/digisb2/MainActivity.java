@@ -54,4 +54,9 @@ public class MainActivity extends ActionBarActivity {
         startActivity(new Intent(MainActivity.this, ExpenseActivity.class));
         return true;
     }
+
+    public boolean OnEmployeeListItemSelected(View item){
+        startActivity(new Intent(MainActivity.this, EmployeeActivity.class));
+        return true;
+    }
 }

@@ -1,17 +1,14 @@
 package conch.magic.smallbusiness.digisb2;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Fred Lee on 4/14/2015.
