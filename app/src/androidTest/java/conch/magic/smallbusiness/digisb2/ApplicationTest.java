@@ -1,6 +1,7 @@
 package conch.magic.smallbusiness.digisb2;
 
 import android.app.Application;
+import android.content.Intent;
 import android.test.ApplicationTestCase;
 
 /**
@@ -10,4 +11,11 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     public ApplicationTest() {
         super(Application.class);
     }
+
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+    }
+
+
 }
