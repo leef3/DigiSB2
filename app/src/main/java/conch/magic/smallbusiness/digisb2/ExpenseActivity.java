@@ -33,15 +33,20 @@ import java.util.Random;
 
 public class ExpenseActivity extends Activity {
 
+    //All variables for handling the listview adapter and content
     private static ExpenseListAdapter mAdapter;
     private static ArrayList<ExpenseObject> expenseList;
     private static ListView lv;
     private static Context context;
+
+    //Tracks total expense on the top of the layout
     private static double expenseTotal;
     private static TextView totalExpense;
 
+    //Later used as a variable to track which row the user wants to delete
     private static int toRemoveId;
 
+    //The Key used in saving the GSON data to Shared Preferences
     public static final String EXPENSE_SAVE_NAME = "DIGI_SB_2_EXPENSE_SAVE_NAME";
 
     @Override
@@ -50,12 +55,10 @@ public class ExpenseActivity extends Activity {
         setContentView(R.layout.expense_main);
         context = this;
 
+        //Load existing data from Shared preferences
         expenseList = new ArrayList<ExpenseObject>();
-        //fillExpenseList calls loadData() but was originally used to generate test objects
-        //fillExpenseList();
         loadData();
 
-        //System.out.println(expenseList.size());
         //Create the custom list adapter and populate it with the arraylist
         lv = (ListView)  findViewById(R.id.test_list);
         totalExpense = (TextView) findViewById(R.id.expense_total);
@@ -93,13 +96,11 @@ public class ExpenseActivity extends Activity {
         final Button addButton = (Button) findViewById(R.id.add_expense_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //ExpenseObject toAdd = new ExpenseObject("TEST ADD", 69.69);
 
                 LayoutInflater li = LayoutInflater.from(context);
                 View promptsView = li.inflate(R.layout.expense_add_dialog, null);
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setView(promptsView);
-                //builder.setTitle("Add New Expense");
 
                 // Set up the input
                 final EditText inputName = (EditText) promptsView.findViewById(R.id.expense_dialog_name_input);
@@ -117,12 +118,14 @@ public class ExpenseActivity extends Activity {
                         addNewExpense(toAdd);
                     }
                 });
+                //Cancel dialog if user clicks cancel
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });
+                //Display the created dialog
                 builder.show();
             }
         });
@@ -131,6 +134,8 @@ public class ExpenseActivity extends Activity {
         final Button resetButton = (Button) findViewById(R.id.reset_expense_button);
         resetButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                //Make the user confirm the delete before erasing everything
                 AlertDialog.Builder confirmBuilder = new AlertDialog.Builder(ExpenseActivity.this);
                 confirmBuilder.setMessage("Confirm Full Expense Reset");
                 // Set up the buttons
@@ -158,7 +163,7 @@ public class ExpenseActivity extends Activity {
         totalExpense.setText(Double.toString(expenseTotal));
         mAdapter.notifyDataSetChanged();
     }
-    //Used for testing but now calls loadData for loading stored info
+    //Used for testing but now we call loadData for loading stored info
     public static void fillExpenseList()
     {
         Random rand = new Random();
@@ -178,6 +183,7 @@ public class ExpenseActivity extends Activity {
         totalExpense.setText(Double.toString(expenseTotal));
         mAdapter.notifyDataSetChanged();
     }
+    //Function to clear the list after the user presses the button and confirms
     public static void clearExpenseList()
     {
         expenseList.clear();
@@ -186,6 +192,7 @@ public class ExpenseActivity extends Activity {
         mAdapter.notifyDataSetChanged();
     }
 
+    //Function to load data from existing local source SharedPreferences with key EXPENSE_SAVE_NAME (above)
     void loadData() {
         SharedPreferences settings = this.getPreferences(MODE_PRIVATE);
         double tempExpenseTotal = 0;
@@ -205,6 +212,7 @@ public class ExpenseActivity extends Activity {
         expenseTotal = tempExpenseTotal;
     }
 
+    //Save info here when the screen is removed from focus
     @Override protected void onPause(){
         super.onPause();
         SharedPreferences.Editor settings = this.getPreferences(MODE_PRIVATE).edit();
@@ -214,6 +222,7 @@ public class ExpenseActivity extends Activity {
         settings.commit();
     }
     @Override
+    //We don't really use this but Android wants us to implement
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_expense, menu);
@@ -221,6 +230,7 @@ public class ExpenseActivity extends Activity {
     }
 
     @Override
+    //We don't really use this but Android wants us to implement
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long

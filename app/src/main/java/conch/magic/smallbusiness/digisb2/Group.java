@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* Represents a category that contains it's children (or inventoryItems) */
+//Group contains multiple GroupItems
 public class Group implements Serializable{
 
     public String string;
@@ -11,6 +12,7 @@ public class Group implements Serializable{
     int row;
     public final ArrayList<GroupItem> children = new ArrayList<GroupItem>();
 
+    //Constructor
     public Group(String title, int r) {
         string = title;
         row = r;

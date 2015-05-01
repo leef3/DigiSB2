@@ -12,22 +12,25 @@ import java.util.ArrayList;
 /**
  * Created by Fred Lee on 4/30/2015.
  */
+
+//Class to handle the population of the List of Employees
 public class EmployeeListAdapter extends BaseAdapter
 {
     Context context;
     protected ArrayList<Employee> employeeList;
     LayoutInflater inflater;
 
+    //Constructor
     public EmployeeListAdapter(Context context, ArrayList<Employee> employeeList) {
         this.employeeList = employeeList;
         this.inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context = context;
     }
 
+    //Returns count, a certain employee, and a certain employee by id
     public int getCount() {
         return employeeList.size();
     }
-
     public Employee getItem(int position) {
         return employeeList.get(position);
     }
@@ -36,12 +39,14 @@ public class EmployeeListAdapter extends BaseAdapter
         return position;
     }
 
+    //Method to add the information from each Employee into a row in the listview.
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = this.inflater.inflate(R.layout.employee_list_item, parent, false);
 
+            //Find UI elements for Pay, Name, and Days
             holder.pay = (TextView) convertView.findViewById(R.id.employee_list_item_pay);
             holder.name = (TextView) convertView.findViewById(R.id.employee_list_item_name);
 
@@ -57,8 +62,10 @@ public class EmployeeListAdapter extends BaseAdapter
             holder = (ViewHolder) convertView.getTag();
         }
 
+        //Get the current Employee Object
         Employee employeeItem = employeeList.get(position);
 
+        //Set the contents of the UI elements
         holder.pay.setText(Double.toString(employeeItem.getPay()));
         holder.name.setText(employeeItem.getName());
 
@@ -67,36 +74,6 @@ public class EmployeeListAdapter extends BaseAdapter
         holder.wednesday.setText(employeeItem.getWednesday());
         holder.thursday.setText(employeeItem.getThursday());
         holder.friday.setText(employeeItem.getFriday());
-
-
-        /*
-        if(employeeItem.getMonday())
-        {
-            //holder.monday.setVisibility(View.INVISIBLE);
-            holder.monday.setText("M");
-        }
-        if(employeeItem.getTuesday())
-        {
-            //holder.tuesday.setVisibility(View.INVISIBLE);
-            holder.monday.setText("T");
-        }
-        if(employeeItem.getWednesday())
-        {
-           // holder.wednesday.setVisibility(View.INVISIBLE);
-            holder.wednesday.setText("W");
-        }
-        if(employeeItem.getThursday())
-        {
-           // holder.thursday.setVisibility(View.INVISIBLE);
-            holder.thursday.setText("R");
-        }
-        if(employeeItem.getFriday())
-        {
-          //  holder.friday.setVisibility(View.INVISIBLE);
-            holder.friday.setText("F");
-        }
-*/
-
 
         return convertView;
     }

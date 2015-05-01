@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -18,22 +17,18 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.HashMap;
 
 /* Manages the Inventory List */
 
-
 public class MyExpandableListAdapter extends BaseExpandableListAdapter {
-    private final HashMap<Integer, Group> groups; //HOlds Category
+    private final HashMap<Integer, Group> groups; //Holds Category
     public LayoutInflater inflater;
     public Activity activity;
 
+    //Constructor
     public MyExpandableListAdapter(Activity act, HashMap<Integer,Group> groups) {
         activity = act;
         this.groups = groups;
@@ -88,14 +83,14 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                 AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 builder.setTitle("Change Inventory Name");
 
-// Set up the input
+        // Set up the input
                 final EditText convertInput = new EditText(activity);
                 convertInput.setTag(v.findViewById(R.id.nameView));
-// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
                 convertInput.setInputType(InputType.TYPE_CLASS_TEXT);
                 builder.setView(convertInput);
 
-// Set up the buttons
+        // Set up the buttons
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

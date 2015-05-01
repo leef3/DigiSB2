@@ -52,4 +52,5 @@
         android:id="@+id/expense_dialog_amount_input" />
 
     </LinearLayout>
+
 </LinearLayout>
